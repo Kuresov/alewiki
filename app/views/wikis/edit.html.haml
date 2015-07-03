@@ -18,4 +18,5 @@
       = f.submit "Submit"
 
 .col-md-4
-  = link_to "Delete Wiki", wiki_path, method: :destroy
+  - if policy(@wiki).destroy?
+    = link_to "Delete Wiki", wiki_path, method: :destroy

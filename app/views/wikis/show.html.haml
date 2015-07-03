@@ -5,4 +5,5 @@
     = @wiki.body
 
 .col-md-4
-  =link_to "Edit Wiki", edit_wiki_path
+  - if policy(@wiki).edit?
+    = link_to "Edit Wiki", edit_wiki_path

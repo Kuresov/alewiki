@@ -13,6 +13,7 @@ group :development do
   gem 'pry-rails'
 end
 
+gem 'pundit'
 gem 'devise'
 gem 'haml'
 gem 'bootstrap-sass'
