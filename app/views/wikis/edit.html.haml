@@ -1,2 +1,21 @@
-<h1>Wikis#edit</h1>
-<p>Find me in app/views/wikis/edit.html.erb</p>
+%h1 Edit #{@wiki.title}
+
+.col-md-8
+  = form_for @wiki do |f|
+    .form_group
+      = f.label :title
+      = f.text_field :title, class:'form-control', autofocus: true, placeholder: "#{@wiki.title}"
+    
+    .form_group
+      = f.label :body
+      = f.text_area :body, class:'form-control', size: '60x12', placeholder: "#{@wiki.body}"
+
+    .form_group
+      = f.label :private
+      = f.check_box :private
+
+    .actions
+      = f.submit "Submit"
+
+.col-md-4
+  = link_to "Delete Wiki", wiki_path, method: :destroy

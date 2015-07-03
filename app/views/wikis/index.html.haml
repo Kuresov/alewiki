@@ -1,3 +1,9 @@
 %h1 Wikis
-- @wikis.each do |wiki|
-  = wiki.title
+
+.col-md-6.col-md-offset-3
+  - @wikis.each do |wiki|
+    .media
+      .media-body
+        %h4.media-heading
+          = link_to wiki.title, wiki
+        = wiki.body.truncate(90)
