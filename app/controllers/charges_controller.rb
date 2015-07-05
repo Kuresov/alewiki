@@ -38,4 +38,9 @@ class ChargesController < ApplicationController
       flash[:error] = e.message
       redirect_to new_charge_path
     end
+
+  def downgrade
+    current_user.update_attributes(role: "standard")
+    redirect_to edit_user_registration_path
+  end
 end
