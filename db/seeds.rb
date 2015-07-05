@@ -2,8 +2,8 @@
 
 3.times do
   user = User.create!(
-    name: Faker::Name.name,
-    email: Faker::Internet.email,
+    name:     Faker::Name.name,
+    email:    Faker::Internet.email,
     password: Faker::Lorem.characters(10)
   )
   user.skip_confirmation!
@@ -14,8 +14,8 @@ users = User.all
 
 15.times do
   Wiki.create!(
-    title: Faker::Lorem.sentence(4),
-    body: Faker::Lorem.paragraph(4),
+    title:   Faker::Lorem.sentence(4),
+    body:    Faker::Lorem.paragraph(4),
     private: [true, false].sample,
     user_id: users.sample
   )

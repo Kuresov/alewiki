@@ -14,6 +14,7 @@ group :development do
   gem 'faker'
 end
 
+gem 'stripe'
 gem 'pundit'
 gem 'devise'
 gem 'haml'
