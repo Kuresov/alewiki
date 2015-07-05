@@ -17,7 +17,7 @@ users = User.all
     title:   Faker::Lorem.sentence(4),
     body:    Faker::Lorem.paragraph(4),
     private: [true, false].sample,
-    user_id: users.sample
+    user: users.sample
   )
 end
 

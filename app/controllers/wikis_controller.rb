@@ -1,6 +1,6 @@
 class WikisController < ApplicationController
   def index
-    @wikis = Wiki.all
+    @wikis = Wiki.visible(current_user)
     authorize @wikis
   end
 
