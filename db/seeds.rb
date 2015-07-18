@@ -13,11 +13,10 @@ end
 users = User.all
 
 15.times do
-  Wiki.create!(
+  users.sample.wikis.create!(
     title:   Faker::Lorem.sentence(4),
     body:    Faker::Lorem.paragraph(4),
-    private: [true, false].sample,
-    user_id: users.sample
+    private: [true, false].sample
   )
 end
 
