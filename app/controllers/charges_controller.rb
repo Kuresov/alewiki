@@ -40,7 +40,13 @@ class ChargesController < ApplicationController
     end
 
   def downgrade
+
     current_user.update_attributes(role: "standard")
+
+    current_user.wikis.each do |wiki|
+      wiki.update_attributes(private: false)
+    end
+
     redirect_to edit_user_registration_path
   end
 end
