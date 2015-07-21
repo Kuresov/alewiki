@@ -40,7 +40,7 @@
   %h4 Account Type: #{ current_user.role.capitalize }
   - if current_user.role == 'standard'
     %h5
-      = link_to "Upgrade Account", new_charge_path
+      = render partial: 'charges/new'
   - else
     %h5
       = link_to "Downgrade Account", charges_downgrade_path

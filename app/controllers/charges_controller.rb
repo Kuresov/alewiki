@@ -2,16 +2,7 @@ require 'ecomm/amount'
 
 class ChargesController < ApplicationController
 
-  def new
-    @stripe_btn_data = {
-      key: "#{ Rails.configuration.stripe[:publishable_key] }",
-      description: "Private Wiki Membership - #{current_user.email}",
-      amount: Amount.default
-    }
-  end
-
     def create
-
       if current_user.role == "standard"
         customer = Stripe::Customer.create(
           email: current_user.email,
