@@ -10,6 +10,16 @@
   user.save!
 end
 
+#Create an admin account
+admin = User.create!(
+  name:     "Alex Kirsopp",
+  email:    "alex@alewiki.com",
+  password: "password",
+  role:     "admin"
+)
+admin.skip_confirmation!
+admin.save!
+
 users = User.all
 
 15.times do

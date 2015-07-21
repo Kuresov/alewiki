@@ -14,6 +14,10 @@ class ApplicationPolicy
     scope.where(:id => record.id).exists?
   end
 
+  def collab?
+    true
+  end
+
   def create?
     user.present?
   end
@@ -31,7 +35,7 @@ class ApplicationPolicy
   end
 
   def destroy?
-    user.present? && (record.user == user || user.admin?)
+    user.present? && (record.collaborators.include? user || user.admin?)
   end
 
   def scope

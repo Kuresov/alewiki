@@ -6,4 +6,7 @@
 
 .col-md-4
   - if policy(@wiki).edit?
-    = link_to "Edit Wiki", edit_wiki_path
+    %p= link_to "Edit Wiki", edit_wiki_path
+  - if @emails.include? current_user.email
+    %p= link_to "Leave Wiki", root_url
+  = render 'wikis/wiki_sidebar'
