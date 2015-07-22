@@ -4,8 +4,13 @@ Rails.application.routes.draw do
   get 'charges/downgrade'
 
   resources :wikis do
+
     collection do
       get :collab
+    end
+
+    member do
+      post :add_collaborator
     end
   end
 

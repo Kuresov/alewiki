@@ -17,6 +17,23 @@
     .actions
       = f.submit "Submit"
 
+//  = form_for @collab, url: { action: "add_collaborator" } do |f|
+//    .form_group
+//      = f.label :email
+//      = f.text_field :email, class: 'form-control', placeholder: "Enter collaborator email"
+//
+//    .actions
+//      = f.submit "Add Collaborator"
+
+.col-md-8
+  = form_tag(action: "add_collaborator") do
+    .form_group
+      = label_tag :collaborator_email
+      = text_field_tag :collaborator_email, nil, class: 'form-control', placeholder: "Enter collaborator email"
+
+    .actions
+      = submit_tag "Add Collaborator"
+
 .col-md-4
   - if policy(@wiki).destroy?
     = link_to "Delete Wiki", wiki_path, method: :destroy

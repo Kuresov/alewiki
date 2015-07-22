@@ -18,21 +18,27 @@ class WikisController < ApplicationController
     @wikis = current_user.wikis
     authorize @wikis
   end
-    
+
     def add_collaborator
       @wiki = Wiki.find(params[:id])
-
-      if User.where(params[:email])
-        @user = User.where(params[:email])
-      else
+      @collab = @wiki.collaborators.new
+      
+      if User.where(email: params[:collaborator_email]).blank?
         flash[:error] = "That email does not exist."
-        redirect_to :back
+        redirect_to edit_wiki_path and return
+      else
+        @user_id = User.where(email: params[:collaborator_email]).first.id
+      end
+      
+      if @wiki.collaborators.where(user_id: @user_id).blank?
+        @collab = @wiki.collaborators.build(user_id: @user_id)
+      else
+        flash[:error] = "That user is already a collaborator for this wiki"
+        redirect_to edit_wiki_path and return
       end
 
-      @collab = @wiki.collaborators.build(params.require(:wiki).permit(user_id: User.where(params[:email]).id)
-      
       if @collab.save
-        flash[:notice] = "#{@user.email} has been added as a collaborator to the wiki"
+        flash[:notice] = "#{params[:collaborator_email]} has been added as a collaborator to the wiki."
         redirect_to @wiki
       else
         flash[:error] = "There was an error adding the collaborator. Please try again."
@@ -60,6 +66,7 @@ class WikisController < ApplicationController
 
   def edit
     @wiki = Wiki.find(params[:id])
+    #@collab = @wiki.collaborators.new
     authorize @wiki
   end
 
