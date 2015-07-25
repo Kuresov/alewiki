@@ -10,20 +10,13 @@
       = f.label :body
       = f.text_area :body, class:'form-control', size: '60x12', placeholder: "#{@wiki.body}"
 
-    .form_group
-      = f.label :private
-      = f.check_box :private
+    - if policy(@wiki).set_private?
+      .form_group
+        = f.label :private
+        = f.check_box :private
 
     .actions
       = f.submit "Submit"
-
-//  = form_for @collab, url: { action: "add_collaborator" } do |f|
-//    .form_group
-//      = f.label :email
-//      = f.text_field :email, class: 'form-control', placeholder: "Enter collaborator email"
-//
-//    .actions
-//      = f.submit "Add Collaborator"
 
 .col-md-8
   = form_tag(action: "add_collaborator") do

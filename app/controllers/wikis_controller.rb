@@ -1,8 +1,8 @@
 class WikisController < ApplicationController
   def index
     if current_user
-      @wikis = policy_scope(Wiki)
-      authorize @wikis
+      @wikis = Wiki.all
+      @wikis.each { |wiki| authorize wiki }
     else
       @wikis = Wiki.where(private: false)
     end
@@ -46,6 +46,21 @@ class WikisController < ApplicationController
       end
     end
 
+    def leave_collaboration
+      @wiki = Wiki.find(params[:id])
+      @collab = Collaborator.find_by(user_id: current_user.id, wiki_id: @wiki.id)
+      authorize @wiki
+      
+      if @collab.blank?
+        flash[:error] = "Your email was not found to be a part of this collaboration."
+        render @wiki
+      else
+        @collab.delete
+        flash[:notice] = "Your collaboration on this wiki has been removed."
+        redirect_to @wiki
+      end
+    end
+
   def new
     @wiki = Wiki.new
     authorize @wiki
@@ -66,7 +81,6 @@ class WikisController < ApplicationController
 
   def edit
     @wiki = Wiki.find(params[:id])
-    #@collab = @wiki.collaborators.new
     authorize @wiki
   end
 
