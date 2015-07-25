@@ -1,6 +1,6 @@
 - if @emails.length > 1
   %h5 Collaborators
-  - @wiki.users.pluck(:email).each do |email|
+  - @wiki.users.each do |user|
     %ul
-      - unless email == current_user.email
-        %li= email
+      - unless user.email == current_user.email
+        %li= user.email

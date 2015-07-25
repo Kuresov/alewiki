@@ -15,7 +15,7 @@ class ApplicationPolicy
   end
 
   def collab?
-    true
+    user.present?
   end
 
   def create?
@@ -35,7 +35,7 @@ class ApplicationPolicy
   end
 
   def destroy?
-    user.present? && (record.collaborators.include? user || user.admin?)
+    user.present? && (record.collaborators.pluck(:user_id).include? user.id || user.admin?)
   end
 
   def scope

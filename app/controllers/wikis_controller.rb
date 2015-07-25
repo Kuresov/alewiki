@@ -53,7 +53,7 @@ class WikisController < ApplicationController
       
       if @collab.blank?
         flash[:error] = "Your email was not found to be a part of this collaboration."
-        render @wiki
+        redirect_to @wiki
       else
         @collab.delete
         flash[:notice] = "Your collaboration on this wiki has been removed."

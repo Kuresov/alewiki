@@ -7,6 +7,6 @@
 .col-md-4
   - if policy(@wiki).edit?
     %p= link_to "Edit Wiki", edit_wiki_path
-  - if (@emails.length > 1) && (@emails.include? current_user.email)
+  - if policy(@wiki).leave_collaboration?
     %p= link_to "Leave Wiki", leave_collaboration_wiki_path, method: :delete
   = render 'wikis/wiki_sidebar'
