@@ -11,4 +11,4 @@
       .media-body
         %h4.media-heading
           = link_to wiki.title, wiki
-        = wiki.body.truncate(90)
+        = markdown_to_plaintext wiki.body.truncate(90)
