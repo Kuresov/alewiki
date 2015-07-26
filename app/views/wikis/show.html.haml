@@ -2,7 +2,7 @@
 
 .col-md-8
   %p
-    = @wiki.body
+    = markdown_to_html @wiki.body
 
 .col-md-4
   - if policy(@wiki).edit?
