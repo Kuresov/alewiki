@@ -6,4 +6,7 @@
 
 .col-md-4
   - if policy(@wiki).edit?
-    = link_to "Edit Wiki", edit_wiki_path
+    %p= link_to "Edit Wiki", edit_wiki_path
+  - if policy(@wiki).leave_collaboration?
+    %p= link_to "Leave Wiki", leave_collaboration_wiki_path, method: :delete
+  = render 'wikis/wiki_sidebar'

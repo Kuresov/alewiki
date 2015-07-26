@@ -36,6 +36,8 @@
         %ul.nav.navbar-nav.navbar-right
           - if current_user
             %li
+              = link_to "My Wikis", collab_wikis_path
+            %li
               = link_to "Settings", edit_user_registration_path
             %li 
               = link_to "Sign Out", destroy_user_session_path, method: :delete

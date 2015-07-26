@@ -1,0 +1,14 @@
+.col-md-12
+  %h1
+    Wikis
+  %h4
+    - if policy(Wiki.new).create?
+      = link_to "New Wiki", new_wiki_url
+
+.col-md-6.col-md-offset-2
+  - @wikis.each do |wiki|
+    .media
+      .media-body
+        %h4.media-heading
+          = link_to wiki.title, wiki
+        = wiki.body.truncate(90)

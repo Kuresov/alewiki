@@ -10,7 +10,7 @@
       = f.label :body
       = f.text_area :body, class:'form-control', size: '60x12'
 
-    - if current_user.role == 'admin' || current_user.role == 'premium'
+    - if policy(@wiki).set_private?
       .form-group
         = f.label :private
         = f.check_box :private

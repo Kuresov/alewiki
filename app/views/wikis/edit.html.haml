@@ -10,13 +10,22 @@
       = f.label :body
       = f.text_area :body, class:'form-control', size: '60x12', placeholder: "#{@wiki.body}"
 
-    - if current_user.role == 'admin' || current_user.role == 'premium'
+    - if policy(@wiki).set_private?
       .form_group
         = f.label :private
         = f.check_box :private
 
     .actions
       = f.submit "Submit"
+
+.col-md-8
+  = form_tag(action: "add_collaborator") do
+    .form_group
+      = label_tag :collaborator_email
+      = text_field_tag :collaborator_email, nil, class: 'form-control', placeholder: "Enter collaborator email"
+
+    .actions
+      = submit_tag "Add Collaborator"
 
 .col-md-4
   - if policy(@wiki).destroy?
