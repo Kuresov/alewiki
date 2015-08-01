@@ -11,7 +11,7 @@
       = f.text_area :body, class:'form-control'
 
     .form-group
-      = f.hidden_field :body
+      = f.hidden_field :body, placeholder: 'Enter the body of your wiki here!', id: "prev"
       %div#epiceditor
 
     - if policy(@wiki).set_private?
@@ -23,12 +23,19 @@
       = f.submit "Submit", onclick: "getContent();"
 
 .col-md-6
-  %p Placeholder for preview window
-
+  %div#previewer
 
 :javascript
+  var editor = new EpicEditor(opts).load();
+
   $(document).ready(function() {
-    editor = new EpicEditor(opts).load();
+    //Generate first preview if client has local info stored already
+    $("#previewer").html($("epiceditor-preview"));
+  });
+
+  //Update preview div for further edits
+  editor.on('update', function() {
+    $("#previewer").html(editor.getElement('editor').body.innerHTML);
   });
 
   var getContent = function() {

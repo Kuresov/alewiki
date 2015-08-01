@@ -19,10 +19,10 @@
 
 var opts = {
   container: 'epiceditor',
-  textarea: null,
   basePath: '../',
   clientSideStorage: true,
   localStorageName: 'epiceditor',
+  textarea: 'prev',
   useNativeFullscreen: true,
   parser: marked,
   file: {
@@ -36,11 +36,10 @@ var opts = {
     editor: 'themes/editor/epic-dark.css'
   },
   button: {
-    preview: true,
-    fullscreen: true,
+    preview: false,
+    fullscreen: false,
     bar: "auto"
   },
-  focusOnLoad: false,
   shortcut: {
     modifier: 18,
     fullscreen: 70,
@@ -51,5 +50,5 @@ var opts = {
     toggleEdit: 'Toggle Edit Mode',
     toggleFullscreen: 'Enter Fullscreen'
   },
-  autogrow: false
+  autogrow: true
 }
