@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  resources :charges, only: [:new, :create]
+  resources :charges, only: [:create]
   get 'charges/downgrade'
 
   resources :wikis do
@@ -15,7 +15,9 @@ Rails.application.routes.draw do
     end
   end
 
-  devise_for :users
+  devise_for :users, controllers: {
+    registrations: 'users/registrations'
+  }
 
   get 'welcome/about'
 
