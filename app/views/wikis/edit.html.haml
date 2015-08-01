@@ -1,14 +1,14 @@
 %h1 Edit #{@wiki.title}
 
-.col-md-8
+.col-md-6
   = form_for @wiki do |f|
     .form_group
       = f.label :title
       = f.text_field :title, class:'form-control', autofocus: true, placeholder: "#{@wiki.title}"
     
     .form_group
-      = f.label :body
-      = f.text_area :body, class:'form-control', size: '60x12', placeholder: "#{@wiki.body}"
+      = f.hidden_field :body, placeholder: "#{@wiki.body}", id: "prev"
+      %div#epiceditor
 
     - if policy(@wiki).set_private?
       .form_group
@@ -18,7 +18,7 @@
     .actions
       = f.submit "Submit"
 
-.col-md-8
+.col-md-6
   = form_tag(action: "add_collaborator") do
     .form_group
       = label_tag :collaborator_email
@@ -27,6 +27,24 @@
     .actions
       = submit_tag "Add Collaborator"
 
-.col-md-4
   - if policy(@wiki).destroy?
     = link_to "Delete Wiki", wiki_path, method: :destroy
+
+
+:javascript
+  var editor = new EpicEditor(opts).load();
+
+  $(document).ready(function() {
+    //Generate first preview if client has local info stored already
+    $("#previewer").html($("epiceditor-preview"));
+  });
+
+  //Update preview div for further edits
+  editor.on('update', function() {
+    $("#previewer").html(editor.getElement('editor').body.innerHTML);
+  });
+
+  var getContent = function() {
+    var content = editor.exportFile();
+    $("#wiki_body").val(content);
+  };

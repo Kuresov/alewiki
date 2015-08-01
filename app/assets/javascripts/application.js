@@ -10,6 +10,8 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require epiceditor.min.js
+//= require epiceditor_options
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap-sprockets
