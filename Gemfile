@@ -11,9 +11,9 @@ end
 group :development do
   gem 'sqlite3'
   gem 'pry-rails'
-  gem 'faker'
 end
 
+gem 'faker'
 gem 'redcarpet'
 gem 'stripe'
 gem 'pundit'
