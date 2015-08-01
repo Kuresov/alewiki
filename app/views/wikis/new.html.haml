@@ -6,10 +6,6 @@
       = f.label :title
       = f.text_field :title, class:'form-control', autofocus: true, placeholder: 'title'
 
-    .form-group#epiceditor
-      = f.label :body
-      = f.text_area :body, class:'form-control'
-
     .form-group
       = f.hidden_field :body, placeholder: 'Enter the body of your wiki here!', id: "prev"
       %div#epiceditor
