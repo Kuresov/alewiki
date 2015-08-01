@@ -1,8 +1,7 @@
 class WikisController < ApplicationController
   def index
     if current_user
-      @wikis = Wiki.all
-      @wikis.each { |wiki| authorize wiki }
+      @wikis = policy_scope(Wiki)
     else
       @wikis = Wiki.where(private: false)
     end

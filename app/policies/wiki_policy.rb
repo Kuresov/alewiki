@@ -36,6 +36,12 @@ class WikiPolicy < ApplicationPolicy
             wikis << wiki     #If the wiki is public, or the user is the author, or the user is a collaborator, show the wiki
           end
         end
+      else
+        all_wikis.each do |wiki|
+          if wiki.private? == false
+            wikis << wiki
+          end
+        end
       end
 
       wikis     #Return the Wikis array
