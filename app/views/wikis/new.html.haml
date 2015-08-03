@@ -2,11 +2,18 @@
 
 .col-md-6
   = form_for @wiki do |f|
-    .form-group
+    - if @wiki.errors.any?
+      .alert.alert-danger
+        %h4 There are #{pluralize(@wiki.errors.count, "error")}.
+        %ul
+          - @wiki.errors.full_messages.each do |msg|
+            %li #{msg}
+
+    = form_group_tag(@wiki.errors[:title]) do
       = f.label :title
       = f.text_field :title, class:'form-control', autofocus: true, placeholder: 'title'
 
-    .form-group
+    = form_group_tag(@wiki.errors[:body]) do
       = f.hidden_field :body, placeholder: 'Enter the body of your wiki here!', id: "prev"
       %div#epiceditor
 
